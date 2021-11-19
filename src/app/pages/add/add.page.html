@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="tertiary" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="tertiary">{{list.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label  position="floating" 
+                  color="tertiary">
+                  Name
+      </ion-label>
+      <ion-button color="tertiary"
+                  slot="end" 
+                  size="default"
+                  expand="block"
+                  (click)="addListItem()">
+        <ion-icon slot="icon-only" 
+                  name="add">
+        </ion-icon>
+      </ion-button>
+      <ion-input  placeholder="Add the list name"
+                  type="text"
+                  clearInput
+                  (keyup.enter)="addListItem()"
+                  [(ngModel)]="itemName">
+      </ion-input>
+      
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header *ngIf="list.items.length !== 0" color="tertiary">
+      <ion-label>Task to do:</ion-label>
+    </ion-list-header>
+
+    <ion-item-sliding *ngFor="let item of list.items">
+      <ion-item>
+        <ion-checkbox color="success"
+                      mode="ios"
+                      slot="start"
+                      [(ngModel)]="item.ended"
+                      (ionChange)="saveCheckBoxChanges()">
+        </ion-checkbox>
+        <ion-label>{{item.description}}</ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option  color="danger"
+                          expandable="off"
+                          (click)="deleteListItem( item.id )">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

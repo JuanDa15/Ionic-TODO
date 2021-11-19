@@ -1,0 +1,20 @@
+<ion-list #listHTML>
+  <ion-item-sliding *ngFor="let listItem of list|listType:ended">
+    <ion-item detail="true" [routerLink]="['../add',listItem.id]">
+      <ion-label>{{listItem.name}}</ion-label>
+      <ion-badge slot="end" color="primary">{{listItem.items.length}} items</ion-badge>
+    </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option>
+          <ion-buttons color="danger">
+            <ion-button (click)="editItem(  listItem )">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="deleteItem( listItem.id )">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
